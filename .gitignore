@@ -1,0 +1,15 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Data and models (large binaries)
+data/processed_graph.pt
+data/raw_transactions.csv
+data/trained_model.pt
+
+# IDEs and OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
