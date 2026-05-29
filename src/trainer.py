@@ -1,15 +1,16 @@
 import torch
 import torch.nn.functional as F
 
-def train_model(model, data, epochs=100):
+def train_model(model, data, epochs=100, lr=0.01):
     # 1. Optimizer: Adam is the industry standard for GNNs
-    optimizer = torch.optim.Adam(model.parameters(), lr=0.01, weight_decay=5e-4)
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=5e-4)
     
     # 2. Handle Class Imbalance
     # We tell the model: "Fraud (1) is 10x more important than Legitimate (0)"
     weights = torch.tensor([1.0, 10.0]) 
     
     model.train()
+    losses = []
     for epoch in range(epochs):
         optimizer.zero_grad() # Reset gradients
         
@@ -23,10 +24,12 @@ def train_model(model, data, epochs=100):
         loss.backward()
         optimizer.step()
         
+        losses.append({"epoch": epoch, "loss": round(loss.item(), 4)})
+        
         if epoch % 10 == 0:
             print(f"Epoch {epoch:03d} | Loss: {loss.item():.4f}")
             
-    return model
+    return model, losses
 
 def get_fraud_scores(model, data):
     model.eval()
@@ -52,7 +55,7 @@ if __name__ == "__main__":
     model = FraudGCN(input_dim=loaded_graph.x.shape[1], hidden_dim=16, output_dim=2)
     
     print("Training Model...")
-    trained_model = train_model(model, loaded_graph)
+    trained_model, losses = train_model(model, loaded_graph)
     
     # Save the model
     torch.save(trained_model.state_dict(), "data/trained_model.pt")
