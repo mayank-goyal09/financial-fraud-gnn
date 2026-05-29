@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GNN Financial Fraud Analytics Dashboard</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- vis.js CDN (Interactive Network Engine) -->
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+    
+    <!-- Chart.js CDN (Premium Analytics Charts) -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="glass-bg"></div>
+    <div class="glow-orb glow-1"></div>
+    <div class="glow-orb glow-2"></div>
+    <div class="glow-orb glow-3"></div>
+
+    <div class="dashboard-container">
+        <!-- HEADER -->
+        <header class="app-header">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-circle-nodes"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Aegis<span>GNN</span></h1>
+                    <p>Relational Financial Crime Intelligence</p>
+                </div>
+            </div>
+            
+            <div class="system-status">
+                <div class="status-pill" id="status-simulation">
+                    <span class="pulse-dot"></span>
+                    <i class="fa-solid fa-database"></i>
+                    <span>Simulated Data: <strong id="sim-indicator">None</strong></span>
+                </div>
+                <div class="status-pill" id="status-graph">
+                    <span class="pulse-dot"></span>
+                    <i class="fa-solid fa-diagram-project"></i>
+                    <span>PyG Graph: <strong id="graph-indicator">Unprocessed</strong></span>
+                </div>
+                <div class="status-pill" id="status-model">
+                    <span class="pulse-dot"></span>
+                    <i class="fa-solid fa-brain"></i>
+                    <span>GNN Weights: <strong id="model-indicator">Untrained</strong></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN LAYOUT GRID -->
+        <main class="dashboard-grid">
+            
+            <!-- COLUMN 1: CONTROL CENTER (left) -->
+            <section class="grid-section column-controls">
+                
+                <!-- CARD 1.1: SIMULATOR PANEL -->
+                <div class="card glass-card">
+                    <div class="card-header">
+                        <i class="fa-solid fa-gears"></i>
+                        <h2>1. Transaction Simulator</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <label for="input-users">
+                                <span>User Nodes</span>
+                                <span class="input-val" id="val-users">1,000</span>
+                            </label>
+                            <input type="range" id="input-users" min="200" max="3000" step="100" value="1000">
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for="input-tx">
+                                <span>Normal Transactions</span>
+                                <span class="input-val" id="val-tx">5,000</span>
+                            </label>
+                            <input type="range" id="input-tx" min="1000" max="15000" step="500" value="5000">
+                        </div>
+                        
+                        <div class="simulation-info-box">
+                            <p><i class="fa-solid fa-shield-halved"></i> Automated Fraud Injections:</p>
+                            <ul>
+                                <li>Criminal Structuring Outflows (5% of users)</li>
+                                <li>Collection Mules (5% of users)</li>
+                                <li>Layered Smurfing Ring (102 nodes)</li>
+                            </ul>
+                        </div>
+                        
+                        <button class="btn btn-primary" id="btn-run-sim">
+                            <i class="fa-solid fa-play"></i> Run Simulation
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 1.2: PREPROCESSING -->
+                <div class="card glass-card">
+                    <div class="card-header">
+                        <i class="fa-solid fa-circle-nodes"></i>
+                        <h2>2. Graph Translation</h2>
+                    </div>
+                    <div class="card-body text-center">
+                        <p class="section-desc">Compile tabular raw logs into a PyTorch Geometric heterogeneous graph structure mapping spatial user behaviors.</p>
+                        <button class="btn btn-secondary" id="btn-process-graph" disabled>
+                            <i class="fa-solid fa-arrows-spin"></i> Build Neural Graph
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 1.3: GNN HYPERPARAMETERS -->
+                <div class="card glass-card">
+                    <div class="card-header">
+                        <i class="fa-solid fa-sliders"></i>
+                        <h2>3. GNN Model Training</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="dual-row">
+                            <div class="input-group width-50">
+                                <label for="input-epochs">Epochs</label>
+                                <input type="number" id="input-epochs" min="10" max="500" value="100">
+                            </div>
+                            <div class="input-group width-50">
+                                <label for="input-lr">Learning Rate</label>
+                                <input type="number" id="input-lr" min="0.0001" max="0.5" step="0.001" value="0.01">
+                            </div>
+                        </div>
+                        
+                        <button class="btn btn-accent" id="btn-train-model" disabled>
+                            <i class="fa-solid fa-bolt"></i> Train FraudGCN
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- COLUMN 2: ANALYTICS & DIRECTORIES (middle) -->
+            <section class="grid-section column-analytics">
+                
+                <!-- CARD 2.1: REALTIME GNN PROGRESS & LOSS -->
+                <div class="card glass-card main-analytics-card">
+                    <div class="card-header">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <h2>GNN Learning & Training Loss</h2>
+                        <div class="metric-pill" id="training-progress-text">Ready</div>
+                    </div>
+                    <div class="card-body chart-container-wrapper">
+                        <div class="chart-canvas-container">
+                            <canvas id="lossChart"></canvas>
+                        </div>
+                        
+                        <div class="metrics-grid">
+                            <div class="metric-box">
+                                <div class="metric-label">Accuracy</div>
+                                <div class="metric-value" id="metric-acc">--</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-label">Precision</div>
+                                <div class="metric-value" id="metric-prec">--</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-label">Recall</div>
+                                <div class="metric-value" id="metric-rec">--</div>
+                            </div>
+                            <div class="metric-box">
+                                <div class="metric-label">F1-Score</div>
+                                <div class="metric-value" id="metric-f1">--</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARD 2.2: SUSPECT LEDGER (Table) -->
+                <div class="card glass-card suspect-ledger-card">
+                    <div class="card-header space-between">
+                        <div class="title-with-icon">
+                            <i class="fa-solid fa-list-check"></i>
+                            <h2>Risk Directory Ledger</h2>
+                        </div>
+                        <div class="search-bar">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                            <input type="text" id="suspect-search" placeholder="Search account ID...">
+                        </div>
+                    </div>
+                    <div class="filter-row">
+                        <span class="filter-label">Filter:</span>
+                        <button class="filter-btn active" data-filter="all">All</button>
+                        <button class="filter-btn" data-filter="critical"><span class="badge danger">Critical</span></button>
+                        <button class="filter-btn" data-filter="warning"><span class="badge warning">Warning</span></button>
+                        <button class="filter-btn" data-filter="legit"><span class="badge success">Legit</span></button>
+                    </div>
+                    <div class="card-body table-scroll-container">
+                        <table class="premium-table" id="suspects-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Account Name</th>
+                                    <th>Role</th>
+                                    <th>Avg Sent ($)</th>
+                                    <th>Risk Score</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="placeholder-row">
+                                    <td colspan="6" class="text-center">Run simulation and model training to unlock directory ledger</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- COLUMN 3: GRAPH INVESTIGATOR (right) -->
+            <section class="grid-section column-investigator">
+                <div class="card glass-card network-investigator-card">
+                    <div class="card-header space-between">
+                        <div class="title-with-icon">
+                            <i class="fa-solid fa-circle-dot"></i>
+                            <h2>4. Ego-Graph Network Investigator</h2>
+                        </div>
+                        <div class="hop-control">
+                            <label for="input-hops">Hops:</label>
+                            <select id="input-hops">
+                                <option value="1">1-Hop</option>
+                                <option value="2" selected>2-Hops</option>
+                                <option value="3">3-Hops</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="investigation-meta" id="investigate-meta-pane">
+                        <div class="investigation-placeholder">
+                            <i class="fa-solid fa-fingerprint animate-radar"></i>
+                            <h3>No Suspect Selected</h3>
+                            <p>Click the <i class="fa-solid fa-crosshairs"></i> button in the Risk Directory Ledger to isolate a node's transaction ecosystem.</p>
+                        </div>
+                    </div>
+                    <div class="network-container-wrapper">
+                        <div id="network-canvas"></div>
+                        <div class="network-legend">
+                            <div class="legend-item"><span class="legend-dot boss"></span> Boss</div>
+                            <div class="legend-item"><span class="legend-dot smurf"></span> Smurf</div>
+                            <div class="legend-item"><span class="legend-dot hub"></span> Hub</div>
+                            <div class="legend-item"><span class="legend-dot crim"></span> Criminal</div>
+                            <div class="legend-item"><span class="legend-dot coll"></span> Collector</div>
+                            <div class="legend-item"><span class="legend-dot normal"></span> Normal</div>
+                            <div class="legend-item"><span class="legend-dot tx"></span> Transaction</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+        
+        <!-- CONSOLE OUTPUT -->
+        <footer class="app-console">
+            <div class="console-header">
+                <i class="fa-solid fa-terminal"></i>
+                <h3>Neural Pipeline Terminal Log</h3>
+                <button id="clear-console"><i class="fa-solid fa-trash-can"></i> Clear</button>
+            </div>
+            <div class="console-body" id="console-logs">
+                <div class="console-line system">[SYSTEM] AegisGNN platform loaded. Ready for ingestion.</div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Script loading -->
+    <script src="app.js"></script>
+</body>
+</html>
