@@ -36,7 +36,7 @@ def main():
     print("\n[Step 3] Initializing and training GCN Model...")
     input_dim = graph.x.shape[1]
     model = FraudGCN(input_dim=input_dim, hidden_dim=16, output_dim=2)
-    trained_model = train_model(model, graph, epochs=100)
+    trained_model, losses = train_model(model, graph, epochs=100)
     
     # Save the trained model
     os.makedirs(os.path.dirname(model_path), exist_ok=True)
