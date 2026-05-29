@@ -325,4 +325,4 @@ if __name__ == "__main__":
     print("     STARTING FRAUD DETECTION GRAPH DASHBOARD SERVER        ")
     print("=" * 60)
     print("Running local web server at http://127.0.0.1:8080")
-    app.run(debug=True, port=8080)
+    app.run(debug=True, use_reloader=False, port=8080)
