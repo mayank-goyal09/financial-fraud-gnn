@@ -28,8 +28,6 @@
 
 ## ⚡ **THE ANOMALY DETECTION ENGINE AT A GLANCE**
 
-## ⚡ **THE ANOMALY DETECTION ENGINE AT A GLANCE**
-
 ### 🎯 **What AegisGNN Does**
 
 AegisGNN is a state-of-the-art **deep learning financial intelligence pipeline** designed to map transaction logs to spatial network graphs, train an advanced Graph Convolutional Network (`FraudGCN`) to classify nodes, and expose hidden criminal syndicates via an Obsidian-themed forensic web dashboard.
