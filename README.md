@@ -28,37 +28,28 @@
 
 ## ⚡ **THE ANOMALY DETECTION ENGINE AT A GLANCE**
 
-<table>
-<tr>
-<td width="55%">
+## ⚡ **THE ANOMALY DETECTION ENGINE AT A GLANCE**
 
 ### 🎯 **What AegisGNN Does**
 
 AegisGNN is a state-of-the-art **deep learning financial intelligence pipeline** designed to map transaction logs to spatial network graphs, train an advanced Graph Convolutional Network (`FraudGCN`) to classify nodes, and expose hidden criminal syndicates via an Obsidian-themed forensic web dashboard.
 
 **Core Pipeline Pillars:**
-* 🎲 **Behavioral Simulation** → Models smurfing loops, cash mules, and structuring.
-* 🕸️ **Spatial Graph Ingestion** → Compiles rows into PyG bipartite transaction nodes.
-* 🧠 **Neural Message Passing** → Trains a 2-layer Graph Convolutional Network.
-* ⚖️ **Imbalance Handling** → Weights class penalties $10\times$ higher for fraud nodes.
-* 🔍 **Interactive Vis.js Sandbox** → Drag-and-drop $N$-hop neighborhood forensic tracer.
-
-</td>
-<td width="45%">
+* 🎲 **Behavioral Simulation** → Models smurfing loops, cash mules, and structuring in real-time.
+* 🕸️ **Spatial Graph Ingestion** → Compiles raw CSV logs into PyG bipartite transaction and user nodes.
+* 🧠 **Neural Message Passing** → Trains a robust 2-layer Graph Convolutional Network on relational features.
+* ⚖️ **Imbalance Handling** → Weights classification penalties $10\times$ higher for positive fraud anomalies.
+* 🔍 **Interactive Vis.js Sandbox** → Physics-driven, drag-and-drop $N$-hop neighborhood forensic tracer.
 
 ### ✨ **Detection Typologies Grid**
 
 | Threat Topology | Pattern Description | Risk Scale |
-|:---|:---|:---:|
+| :--- | :--- | :---: |
 | 🌀 **Smurfing Rings** | 1 Boss $\rightarrow$ 100 Smurfs $\rightarrow$ 1 Consolidation Hub | **CRITICAL** (100%) |
-| 💸 **Criminal Outflows** | Large dispersals to randomized retail entities | **HIGH** (90%) |
-| 🪓 **Collector Mules** | Rapid accumulations from disjoint clusters | **HIGH** (85%) |
+| 💸 **Criminal Outflows** | Large asset dispersals to randomized retail entities | **HIGH** (90%) |
+| 🪓 **Collector Mules** | Rapid asset accumulations from disjoint clusters | **HIGH** (85%) |
 | 🌉 **Bridge Entities** | Covert transit vectors linking isolated subnetworks | **MODERATE** (40%) |
 | 🟢 **Normal Activity** | Regular localized peer-to-peer transaction flows | **LOW** (0.1%) |
-
-</td>
-</tr>
-</table>
 
 ---
 
@@ -101,41 +92,30 @@ graph TD
     style H fill:#10B981,color:#fff
 ```
 
-### **Technical Breakdown:**
+### **Technical Pipeline Breakdown:**
 
-<table>
-<tr>
-<td>
+---
 
 #### 1. Bipartite Graph Compiling 🕸️
-Standard tables ignore relational depth. AegisGNN converts logs into a bipartite topology where **Users** and **Transactions** are individual nodes, and transaction flows are weighted edges:
+Standard tabular databases ignore deep relational connections. AegisGNN converts raw logs into a bipartite topology where **Users** and **Transactions** are individual nodes, and transaction flows are mapped as weighted edges:
 $$\text{Sender User} \xrightarrow{\text{Edge}} \text{Transaction Node} \xrightarrow{\text{Edge}} \text{Receiver User}$$
 
-</td>
-<td>
+---
 
 #### 2. Spatial Convolution (`FraudGCN`) 🧠
-We employ spatial message-passing convolutions:
+We employ spatial message-passing graph convolutions to aggregate neighboring attributes:
 $$\mathbf{x}_i^{(k)} = \mathbf{\Theta}^{\top} \sum_{j \in \mathcal{N}(i) \cup \{i\}} \frac{1}{\sqrt{\hat{d}_i \hat{d}_j}} \mathbf{x}_j^{(k-1)}$$
-Aggregating relational indicators from neighboring transactions to expose multi-hop smurfing patterns.
+This captures spatial behavior (e.g. high frequency, night-trading, smurfing structures) from surrounding transaction chains to identify outliers.
 
-</td>
-</tr>
-<tr>
-<td>
+---
 
 #### 3. Class Imbalance Mitigation ⚖️
-Because fraud is naturally rare ($< 5\%$ of transactions), standard models degrade. AegisGNN embeds a weighted Negative Log-Likelihood Loss ($10\times$ penalty weight for true positive anomalies) to avoid network classification bias.
+Because financial fraud is naturally rare ($< 5\%$ of total bank activity), regular models bias heavily towards legitimate labels. AegisGNN implements a weighted Negative Log-Likelihood Loss ($10\times$ penalty weight on true positive fraud nodes) to force the model to identify criminal patterns.
 
-</td>
-<td>
+---
 
 #### 4. Live Forensic Sandboxing 🔬
-Integrates PyG's `k_hop_subgraph` to instantly construct localized transactional subgraphs. Risk analysts can visually drag, trace, and audit the exact connections of any targeted suspect.
-
-</td>
-</tr>
-</table>
+Integrates PyG's `k_hop_subgraph` to dynamically query and extract local transaction networks of targeted suspect accounts in real-time. Compliance officers can visually trace, drag, and examine transaction flow directions.
 
 ---
 
