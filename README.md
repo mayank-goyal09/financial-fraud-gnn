@@ -1,52 +1,251 @@
-# Financial Fraud Detection using Graph Neural Networks (GNNs)
+<div align="center">
 
-A state-of-the-art machine learning pipeline utilizing Graph Convolutional Networks (GCNs) to detect complex financial fraud patterns (such as money laundering smurfing rings, criminal out-flows, and high-volume collectors) within simulated banking transaction networks.
+# 🛡️ AegisGNN — Relational Financial Crime Intelligence
 
-## 🌟 Key Features
-- **Bank Network Simulation**: Artificially synthesizes high-fidelity banking transactions containing normal patterns alongside injection of specific fraudulent activities:
-  - **Criminal Outflow**: High out-degree entities distributing assets.
-  - **Collector Inflow**: High in-degree hubs gathering assets.
-  - **Smurfing Ring**: Multi-layered money-laundering topologies (1 Boss -> 100 Smurfs -> 1 Hub).
-- **Heterogeneous Graph Construction**: Compiles raw logs into structured graph representations (Users and Transactions as nodes, connected via weighted transaction flows).
-- **Deep Graph Representation Learning**: Uses a 2-layer Graph Convolutional Network (GCN) built on PyTorch Geometric to perform node classification.
-- **Explainable AI Neighborhood Investigation**: Isolates and visualizes the N-hop ego-graph around detected high-risk fraud suspects.
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Outfit&weight=700&size=32&duration=3500&pause=1000&color=38BDF8&center=true&vCenter=true&width=900&height=50&lines=Relational+Financial+Crime+Intelligence+🛡️;Graph+Neural+Networks+→+Anomaly+Detection;PyG+FraudGCN+%7C+Vis.js+Forensic+Dashboard)](https://git.io/typing-svg)
 
-## 🛠️ Project Structure
-```text
-project 64 fraud detection/
-├── data/
-│   ├── raw_transactions.csv   # Synthesized transaction log
-│   ├── processed_graph.pt     # Serialized PyTorch Geometric Graph
-│   └── trained_model.pt       # Trained GNN weights
-├── notebooks/
-│   └── main.ipynb             # Interactive analysis playground
-├── src/
-│   ├── data_processor.py      # Cleans & maps transaction logs to a Graph
-│   ├── model.py               # FraudGCN PyTorch module
-│   ├── trainer.py             # Optimizer setup, loss weighting & training
-│   └── visualizer.py          # NetworkX ego-graph neighborhood plotter
-├── main.py                    # End-to-end pipeline orchestrator
-└── requirements.txt           # Environment dependencies
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
+![PyTorch Geometric](https://img.shields.io/badge/PyG-38BDF8?style=for-the-badge&logo=pytorch&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+
+<br/>
+
+[![🚀 Interactive SPA Dashboard](https://img.shields.io/badge/🚀_INTERACTIVE_DASHBOARD-AegisGNN_Server-38bdf8?style=for-the-badge&labelColor=0b0f19)](http://127.0.0.1:8085)
+[![GitHub Stars](https://img.shields.io/github/stars/mayank-goyal09/financial-fraud-gnn?style=for-the-badge&color=ffd700)](https://github.com/mayank-goyal09/financial-fraud-gnn/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/mayank-goyal09/financial-fraud-gnn?style=for-the-badge&color=87ceeb)](https://github.com/mayank-goyal09/financial-fraud-gnn/network)
+
+<br/>
+
+### 🧠 **Using Graph Neural Networks to detect multi-hop anomalies & launder networks** 
+### **From Transaction Logging → Forensic Ego-Graph Network Investigations** 🛰️
+
+</div>
+
+---
+
+## ⚡ **THE ANOMALY DETECTION ENGINE AT A GLANCE**
+
+<table>
+<tr>
+<td width="55%">
+
+### 🎯 **What AegisGNN Does**
+
+AegisGNN is a state-of-the-art **deep learning financial intelligence pipeline** designed to map transaction logs to spatial network graphs, train an advanced Graph Convolutional Network (`FraudGCN`) to classify nodes, and expose hidden criminal syndicates via an Obsidian-themed forensic web dashboard.
+
+**Core Pipeline Pillars:**
+* 🎲 **Behavioral Simulation** → Models smurfing loops, cash mules, and structuring.
+* 🕸️ **Spatial Graph Ingestion** → Compiles rows into PyG bipartite transaction nodes.
+* 🧠 **Neural Message Passing** → Trains a 2-layer Graph Convolutional Network.
+* ⚖️ **Imbalance Handling** → Weights class penalties $10\times$ higher for fraud nodes.
+* 🔍 **Interactive Vis.js Sandbox** → Drag-and-drop $N$-hop neighborhood forensic tracer.
+
+</td>
+<td width="45%">
+
+### ✨ **Detection Typologies Grid**
+
+| Threat Topology | Pattern Description | Risk Scale |
+|:---|:---|:---:|
+| 🌀 **Smurfing Rings** | 1 Boss $\rightarrow$ 100 Smurfs $\rightarrow$ 1 Consolidation Hub | **CRITICAL** (100%) |
+| 💸 **Criminal Outflows** | Large dispersals to randomized retail entities | **HIGH** (90%) |
+| 🪓 **Collector Mules** | Rapid accumulations from disjoint clusters | **HIGH** (85%) |
+| 🌉 **Bridge Entities** | Covert transit vectors linking isolated subnetworks | **MODERATE** (40%) |
+| 🟢 **Normal Activity** | Regular localized peer-to-peer transaction flows | **LOW** (0.1%) |
+
+</td>
+</tr>
+</table>
+
+---
+
+## 🛠️ **TECHNOLOGY & ARCHITECTURE STACK**
+
+<div align="center">
+
+![Tech Stack](https://skillicons.dev/icons?i=python,pytorch,flask,html,css,js,github,vscode)
+
+</div>
+
+| **Category** | **Technologies** | **Role & Implementation** |
+|:------------:|:-----------------|:--------------------------|
+| 🐍 **Core Engine** | Python 3.9+ / Pandas / NumPy | Primary pipeline script and tensor data parsing. |
+| 🧬 **Deep Learning** | PyTorch / PyTorch Geometric | Model architecture, spatial convolutions, and edge features. |
+| 🕸️ **Network Parsing** | NetworkX / Vis.js | Bipartite graphs, N-hop neighborhood extractions, and physics-driven layouts. |
+| 🔌 **Server & APIs** | Flask / Flask-CORS | REST API router providing real-time training outputs and suspect registers. |
+| 🎨 **UI/UX Design** | HTML5 / CSS3 (Obsidian Glassmorphism) | Glassmorphic neon cards, custom HSL glows, and dynamic console logs. |
+| 📊 **Scientific Charts** | Chart.js | Dynamic animated training loss curves. |
+
+---
+
+## 🔬 **DATA PIPELINE & MESSAGE PASSING FLOW**
+
+```mermaid
+graph TD
+    A[📊 Raw Transaction CSV] -->|data.py / simulator.py| B[🕸️ Bipartite Tensor Compilation]
+    B -->|Node Features & Edge Weights| C[🧠 2-Layer FraudGCN Convolution]
+    C -->|Adam Optimizer & Weighted Loss| D[⚖️ Anomaly Probability Scoring]
+    D -->|Flask REST API| E[💻 Obsidian Glassmorphic Web App]
+    
+    subgraph Frontend Forensic Interface
+        E --> F[📊 Real-Time Loss Curves]
+        E --> G[📋 Suspect Ledger Directory]
+        E --> H[🕸️ Physics-Driven Ego-Graph Inspector]
+    end
+
+    style A fill:#EE4C2C,color:#fff
+    style C fill:#38BDF8,color:#fff
+    style H fill:#10B981,color:#fff
 ```
 
-## 🚀 Getting Started
+### **Technical Breakdown:**
 
-### 1. Install Dependencies
+<table>
+<tr>
+<td>
+
+#### 1. Bipartite Graph Compiling 🕸️
+Standard tables ignore relational depth. AegisGNN converts logs into a bipartite topology where **Users** and **Transactions** are individual nodes, and transaction flows are weighted edges:
+$$\text{Sender User} \xrightarrow{\text{Edge}} \text{Transaction Node} \xrightarrow{\text{Edge}} \text{Receiver User}$$
+
+</td>
+<td>
+
+#### 2. Spatial Convolution (`FraudGCN`) 🧠
+We employ spatial message-passing convolutions:
+$$\mathbf{x}_i^{(k)} = \mathbf{\Theta}^{\top} \sum_{j \in \mathcal{N}(i) \cup \{i\}} \frac{1}{\sqrt{\hat{d}_i \hat{d}_j}} \mathbf{x}_j^{(k-1)}$$
+Aggregating relational indicators from neighboring transactions to expose multi-hop smurfing patterns.
+
+</td>
+</tr>
+<tr>
+<td>
+
+#### 3. Class Imbalance Mitigation ⚖️
+Because fraud is naturally rare ($< 5\%$ of transactions), standard models degrade. AegisGNN embeds a weighted Negative Log-Likelihood Loss ($10\times$ penalty weight for true positive anomalies) to avoid network classification bias.
+
+</td>
+<td>
+
+#### 4. Live Forensic Sandboxing 🔬
+Integrates PyG's `k_hop_subgraph` to instantly construct localized transactional subgraphs. Risk analysts can visually drag, trace, and audit the exact connections of any targeted suspect.
+
+</td>
+</tr>
+</table>
+
+---
+
+## 📂 **PROJECT BLUEPRINT**
+
+```text
+🛡️ AegisGNN/
+│
+├── 📂 data/                    # Data Repository
+│   ├── raw_transactions.csv    # Simulated transactional dataset
+│   ├── processed_graph.pt      # Serialized PyTorch Geometric Hetero-Graph
+│   └── trained_model.pt        # Optimized GNN model weight checkpoints
+│
+├── 📂 notebooks/               # Research Laboratory
+│   └── main.ipynb              # Jupyter notebook for custom visualizations
+│
+├── 📂 src/                     # Core Deep Learning Pipeline
+│   ├── data_processor.py       # Cleans & maps transaction logs to a Graph
+│   ├── model.py                # FraudGCN PyTorch Neural Module
+│   ├── trainer.py              # Loss optimization & model training scripts
+│   └── visualizer.py           # NetworkX static ego-graph plotter
+│
+├── 📂 web/                     # Obsidian-Glassmorphism SPA Frontend
+│   ├── index.html              # Clean semantic structural HTML interface
+│   ├── style.css               # Translucent neon glassmorphism CSS stylesheets
+│   └── app.js                  # Vis.js network compiler & dynamic DOM controllers
+│
+├── 📊 app.py                   # Central Flask REST API server
+├── 🚀 main.py                  # End-to-end command-line orchestrator
+├── 📦 requirements.txt         # Primary python environment dependencies
+└── 📖 README.md                # You are here! 🎉
+```
+
+---
+
+## 🚀 **GETTING STARTED & LAUNCH GUIDE**
+
+### **Step 1: Clone the Repository** 📥
+```bash
+git clone https://github.com/mayank-goyal09/financial-fraud-gnn.git
+cd financial-fraud-gnn
+```
+
+### **Step 2: Create a Clean Environment** 🐍
+```bash
+python -m venv venv
+source venv/bin/activate   # On Windows: venv\Scripts\activate
+```
+
+### **Step 3: Ingest Dependencies** 📦
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Run the Pipeline
-Simply execute the main orchestration script to run simulation, processing, model training, evaluation, and visualization:
+### **Step 4: Launch the Deep Learning Engine** 🛡️
+Execute the command-line orchestrator to simulate the banking transactions, compile the graph tensors, train the GNN model, and run initial evaluation metrics:
 ```bash
 python main.py
 ```
 
-### 3. Interactive Visualization
-Open `notebooks/main.ipynb` to customize the visualization parameters and run interactive ad-hoc investigations.
+### **Step 5: Fire Up the Glassmorphic Web App** 💻
+Launch the central Flask dashboard server:
+```bash
+python app.py
+```
+Open your browser and navigate to the live forensic interface:
+👉 **`http://127.0.0.1:8085`**
 
-## 📊 GNN Model Architecture
-The custom `FraudGCN` model implements a robust Graph Convolutional Network topology:
-- **Layer 1**: Graph Convolution (`GCNConv`) compressing feature dimensions to a 16-dimensional embedding space, followed by `ReLU` activation and a dropout probability of `0.5` to minimize overfitting.
-- **Layer 2**: Secondary Graph Convolution mapping representation into 2-class predictions (Legitimate vs. Fraudulent).
-- **Weighted Loss**: An optimized Negative Log-Likelihood loss (`NLLLoss`) using a weighted vector to tackle massive class imbalance (Fraud is weighted 10x relative to Legitimate).
+---
+
+## 🔬 **SKILLS DEMONSTRATED**
+
+* **Deep Representation Learning**: PyTorch Geometric, spatial GCN layers, node classification pipelines.
+* **Complex Data Modeling**: Bipartite graph compilation, relational databases, tensor transformations.
+* **Explainable AI (XAI)**: $N$-hop neighborhood extractions, ego-graph isolations, audit trails.
+* **Premium Fullstack MLOps**: REST API construction, dynamic client-server caching, responsive Obsidian-glassmorphism interfaces.
+* **Mathematical Optimization**: Addressing class imbalance, weighted loss formulations, regularizations.
+
+---
+
+## 🔮 **FUTURE UPGRADES**
+
+- [ ] 🔄 **Attention GNNs**: Upgrading `FraudGCN` to Graph Attention Networks (`GATConv`) to weigh node edges dynamically.
+- [ ] ⏱️ **Real-Time Transaction Injector**: An interactive web form to inject live transactions and watch risk ratings update dynamically.
+- [ ] 🗄️ **Neo4j / SQL Integrations**: Interfacing local graph databases with real production data.
+- [ ] 🤖 **LLM Forensic Copilot**: Generating automated NLP compliance reports for suspicious transacting networks.
+
+---
+
+## 👨‍💻 **CONNECT WITH ME**
+
+<div align="center">
+
+[![GitHub](https://img.shields.io/badge/GitHub-mayank--goyal09-181717?style=for-the-badge&logo=github)](https://github.com/mayank-goyal09)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Mayank_Goyal-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/mayank-goyal-4b8756363/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Visit_Site-38bdf8?style=for-the-badge&logo=googlechrome&logoColor=white)](https://mayank-portfolio-delta.vercel.app/)
+
+**Mayank Goyal**  
+🧠 GNN & Deep Learning Architect | 📊 Financial Intelligence Specialist | ⚖️ MLOps Engineer
+
+</div>
+
+---
+
+<div align="center">
+
+### 🛡️ **Built with AI & ❤️ by Mayank Goyal**
+
+*"Exposing hidden loops, uncovering financial truth."* 🛡️🕸️🧠
+
+![Footer](https://capsule-render.vercel.app/api?type=waving&color=0:38bdf8,100:4158d0&height=120&section=footer)
+
+</div>
